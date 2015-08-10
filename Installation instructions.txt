@@ -35,7 +35,7 @@ Elongation ratio is the ratio of the major to minor axis of an ellipse fit to th
 
 
 ===HOW TO CITE===
-Please reference Blonder, B. Leaf size and shape analysis code. Available at http://www.benjaminblonder.org/
+Please reference Blonder, B. Leaf size and shape analysis code. Available at http://www.benjaminblonder.org/leafarea
 
 
 ===LICENSE===
