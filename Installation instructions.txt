@@ -1,7 +1,5 @@
 ===LEAF SIZE (AREA) AND SHAPE CODE===
 
-Code is provided for inferring the size and shape 
-
 ===CONTACT INFORMATION===
 Benjamin Blonder
 bblonder@gmail.com
