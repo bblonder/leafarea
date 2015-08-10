@@ -1,0 +1,57 @@
+// Code by Benjamin Blonder (bblonder@gmail.com)
+
+// After installation press 'b' to run on a batch of images
+// within a certain folder
+
+// or press 'a' to run on a single image
+// the code assumes that images show leaves in color on 
+// a white background
+
+// further commented lines in the leafArea() function
+// can be uncommented (and macro then re-installed)
+// to add additional noise-reduction and hole-filling
+// functionality
+
+var dpi = 300;
+var pixelsPerCentimeter = dpi / 2.54; // 300 dpi
+
+macro "Leaf batch [b]" {
+  dir1 = getDirectory("Choose Source Directory ");
+  list = getFileList(dir1);
+  for (i=0; i<list.length; i++) {
+     showProgress(i+1, list.length);
+	open(dir1+list[i]);
+	leafArea();
+     close();
+  }
+}
+
+macro "Leaf area [a]" 
+{
+	leafArea();
+}
+
+function leafArea()
+ {
+
+	run("Clear Results");
+	run("Set Scale...", "distance=" + pixelsPerCentimeter + " known=1 pixel=1 unit=cm");
+	
+	// uncomment if background is very noisy or dirty
+	//run("Subtract Background...", "rolling=50 light");
+	
+	run("Make Binary");
+	
+	// uncomment below 2 lines if thresholded image has undesired holes
+	// (e.g. herbivory) that should be filled in
+	//run("Fill Holes");
+	//run("Remove Outliers...", "radius=10 threshold=50 which=Dark");
+	
+	run("Create Selection");
+	run("Set Measurements...", "area redirect=None decimal=3");
+	run("Analyze Particles...", "size=0-Infinity circularity=0.00-1.00 show=Nothing display clear");
+	run("Summarize");
+	var area = getResult("Area"); // this will get the last line of the results, the maximum
+	getStatistics(area);
+	print(getTitle(), area);
+}

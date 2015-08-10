@@ -1,0 +1,43 @@
+===LEAF SIZE (AREA) AND SHAPE CODE===
+
+Code is provided for inferring the size and shape 
+
+===CONTACT INFORMATION===
+Benjamin Blonder
+bblonder@gmail.com
+
+
+===IMAGEJ Instructions===
+Copy the 'Code - ImageJ/Leaf area.txt' file to the 'macros' subfolder of your ImageJ installation. From within ImageJ, go to the Plugins > Macros > Install... and select the Leaf.area.txt file. 
+
+From within ImageJ, press 'b' to select a folder of images to analyze, or press 'a' to analyze a single open image. Output appears in a log window with filename and leaf area in cm2.
+
+This code assumes that images are scanned on white backgrounds at 300 dpi resolution. The resolution can be changed by editing the 'var dpi' line of the macro file and then re-installing the macro.
+
+
+===MATLAB Instructions===
+Copy the files in 'Code - MATLAB/' to any folder. Add this folder to the MATLAB search path. From within MATLAB, run 'a_batchbinarize' on a folder of images, e.g.
+
+a_batchbinarize('Test images/', 'jpg')
+
+Other arguments can be passed to this function to control the thresholding operation - see documentation within the function. The code assumes a single leaf scanned on a white background, but can accommodate multiple leaves (see inline documentation).
+
+Next, inspect all thresholded images, which will be saved in the same folder as the input images with extension 'gif'. If these images are acceptable, proceed; otherwise edit parameters or manually edit GIF files until silhouettes are acceptable.
+
+From within MATLAB, next run 'b_batchoutlinemorphology' on the same folder, e.g.
+b_batchoutlinemorphology('Test images/', 300 / 2.54, 'outfile.csv')
+
+The resolution (in pixels per centimeter) must be specified as the second argument, and an output CSV file must be specified as the third argument. Output appears in a CSV file with the following headers.
+
+filename,major axis length (cm),minor axis length (cm),elongation ratio (dimensionless),shape factor (dimensionless),feret diameter ratio (dimensionless),area (cm2),perimeter (cm)
+
+Elongation ratio is the ratio of the major to minor axis of an ellipse fit to the leaf. Shape factor captures the ratio of perimeter^2 to leaf area, with larger values indicating more complex / dissected leaf margins. Feret diameter ratio captures the ratio between the leaf's maximum length along any axis to a standardized length representing a circular compaction of the leaf's area, with larger values indicating more complex shapes.
+
+
+===HOW TO CITE===
+Please reference Blonder, B. Leaf size and shape analysis code. Available at http://www.benjaminblonder.org/
+
+
+===LICENSE===
+This code is shared under a Creative Commons Attribution-NonCommercial-ShareAlike 
+ license (CC BY-NC-SA). For more information, see http://creativecommons.org/licenses/by-nc-sa/4.0/.
