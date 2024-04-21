@@ -22,6 +22,7 @@ macro "Leaf batch [b]" {
      showProgress(i+1, list.length);
 	open(dir1+list[i]);
 	leafArea();
+	wait(500);
      close();
   }
 }

@@ -2,7 +2,7 @@
 
 ===CONTACT INFORMATION===
 Benjamin Blonder
-bblonder@gmail.com
+benjamin.blonder@berkeley.edu
 
 
 ===IMAGEJ Instructions===
